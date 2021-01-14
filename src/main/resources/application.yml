@@ -2,10 +2,20 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:hsqldb:hsql:/localhost:9001/db
+    url: jdbc:hsqldb:mem:localhost:9001/db
     driverClassName: org.hsqldb.jdbcDriver
     username: root
     password: pass
+    cachePrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+    useServerPrepStmts: true
+    useLocalSessionState: true
+    rewriteBatchedStatements: true
+    cacheResultSetMetadata: true
+    cacheServerConfiguration: true
+    elideSetAutoCommits: true
+    maintainTimeStats: false
   jpa:
     show-sql: true
     open-in-view: false

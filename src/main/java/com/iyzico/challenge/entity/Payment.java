@@ -14,6 +14,10 @@ public class Payment {
     private BigDecimal price;
     private String bankResponse;
 
+    public Payment() {
+
+    }
+
     public Long getId() {
         return id;
     }

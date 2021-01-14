@@ -1,13 +1,17 @@
 package com.iyzico.challenge.service;
 
 import com.iyzico.challenge.entity.Payment;
+import com.iyzico.challenge.model.BankPaymentRequest;
+import com.iyzico.challenge.model.BankPaymentResponse;
 import com.iyzico.challenge.repository.PaymentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.concurrent.Callable;
 
 @Service
 @Transactional
@@ -18,6 +22,7 @@ public class IyzicoPaymentService {
     private BankService bankService;
     private PaymentRepository paymentRepository;
 
+    @Autowired
     public IyzicoPaymentService(BankService bankService, PaymentRepository paymentRepository) {
         this.bankService = bankService;
         this.paymentRepository = paymentRepository;
@@ -27,7 +32,13 @@ public class IyzicoPaymentService {
         //pay with bank
         BankPaymentRequest request = new BankPaymentRequest();
         request.setPrice(price);
-        BankPaymentResponse response = bankService.pay(request);
+        BankPaymentResponse response = new BankPaymentResponse("");
+
+        Callable<String> callable = () -> {
+            // Perform some computation
+            bankService.pay(request);
+            return "foo";
+        };
 
         //insert records
         Payment payment = new Payment();

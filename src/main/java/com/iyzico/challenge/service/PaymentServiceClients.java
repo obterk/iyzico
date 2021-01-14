@@ -2,7 +2,6 @@ package com.iyzico.challenge.service;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.concurrent.CompletableFuture;
 
